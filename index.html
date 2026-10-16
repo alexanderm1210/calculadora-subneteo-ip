@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0f3460">
+<title>Calculadora Subneteo IP</title>
+<style>
+:root{--bg:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);--card:rgba(255,255,255,0.06);--card-border:rgba(255,255,255,0.12);--text:#e8e8f0;--text-muted:#a0a0b8;--accent:#00d9ff;--accent2:#00ff88;--input-bg:rgba(0,0,0,0.35);--input-border:rgba(255,255,255,0.15);--shadow:0 8px 32px rgba(0,0,0,0.35);--success-bg:rgba(0,255,136,0.1);--error-bg:rgba(255,70,70,0.15);--error-border:rgba(255,70,70,0.4);--error-text:#ff6b6b;--table-header:rgba(0,217,255,0.15)}
+[data-theme=light]{--bg:linear-gradient(135deg,#e8f4fc 0%,#d0e8f7 50%,#b8dcf0 100%);--card:rgba(255,255,255,0.85);--card-border:rgba(0,80,150,0.15);--text:#1a2a3a;--text-muted:#5a6a7a;--accent:#0077cc;--accent2:#00a86b;--input-bg:rgba(255,255,255,0.9);--input-border:rgba(0,80,150,0.25);--shadow:0 8px 32px rgba(0,60,120,0.12);--success-bg:rgba(0,168,107,0.12);--error-bg:rgba(220,50,50,0.1);--error-border:rgba(220,50,50,0.35);--error-text:#c0392b;--table-header:rgba(0,119,204,0.12)}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);min-height:100vh;color:var(--text);padding:12px;padding-bottom:40px}.container{max-width:720px;margin:0 auto}header{text-align:center;padding:16px 8px 20px;position:relative}header h1{font-size:1.55rem;color:var(--accent);margin-bottom:4px;font-weight:700}header p{color:var(--text-muted);font-size:.9rem}.theme-btn{position:absolute;top:12px;right:8px;background:var(--card);border:1px solid var(--card-border);border-radius:50%;width:42px;height:42px;font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow)}.tabs{display:flex;gap:6px;margin-bottom:16px;background:var(--card);padding:6px;border-radius:14px;border:1px solid var(--card-border)}.tab{flex:1;padding:11px 8px;text-align:center;border-radius:10px;font-weight:600;font-size:.9rem;cursor:pointer;color:var(--text-muted);border:none;background:transparent}.tab.active{background:var(--accent);color:#000}.card{background:var(--card);border:1px solid var(--card-border);border-radius:16px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow)}.card h2{color:var(--accent);font-size:1.15rem;margin-bottom:16px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}@media(max-width:480px){.form-grid{grid-template-columns:1fr}header h1{font-size:1.35rem}}.form-group{display:flex;flex-direction:column;gap:5px}label{font-size:.82rem;color:var(--text-muted);font-weight:600}input,select{padding:12px 14px;border:1px solid var(--input-border);border-radius:10px;background:var(--input-bg);color:var(--text);font-size:1rem;width:100%;-webkit-appearance:none}input:focus,select:focus{outline:none;border-color:var(--accent)}.btn-group{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}button.btn{padding:13px 22px;border:none;border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;flex:1;min-width:120px}.btn-primary{background:linear-gradient(135deg,var(--accent),#0099cc);color:#000}.btn-secondary{background:transparent;color:var(--text);border:1px solid var(--input-border)}.examples{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}.example-btn{padding:7px 11px;font-size:.78rem;background:rgba(0,217,255,.1);border:1px solid rgba(0,217,255,.3);color:var(--accent);border-radius:8px;cursor:pointer}.error{background:var(--error-bg);border:1px solid var(--error-border);color:var(--error-text);padding:12px;border-radius:10px;margin-bottom:14px;display:none;font-size:.9rem}.error.show{display:block}.results{display:none}.results.show{display:block}.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:480px){.result-grid{grid-template-columns:1fr}}.result-item{background:rgba(0,0,0,.18);padding:12px 14px;border-radius:10px;border-left:4px solid var(--accent)}.result-item.highlight{border-left-color:var(--accent2);background:var(--success-bg)}.result-item .label{font-size:.75rem;color:var(--text-muted);margin-bottom:3px}.result-item .value{font-size:1.05rem;font-weight:700;font-family:monospace;word-break:break-all}.subnets-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:.88rem}.subnets-table th{background:var(--table-header);color:var(--accent);padding:10px 8px;text-align:left;font-weight:700;font-size:.8rem}.subnets-table td{padding:9px 8px;border-bottom:1px solid var(--card-border);font-family:monospace;font-size:.85rem}.subnets-table tr.current{background:var(--success-bg)}.vlsm-row{display:flex;gap:8px;margin-bottom:10px;align-items:center}.vlsm-row input{flex:1}.vlsm-row .remove-btn{background:var(--error-bg);border:1px solid var(--error-border);color:var(--error-text);width:38px;height:38px;border-radius:8px;font-size:1.1rem;cursor:pointer;flex-shrink:0}.subnet-card{background:rgba(0,0,0,.18);border-radius:12px;padding:14px;margin-bottom:10px;border-left:4px solid var(--accent)}.subnet-card h3{color:var(--accent);font-size:.95rem;margin-bottom:8px}.subnet-card .detail{font-size:.85rem;margin:3px 0;font-family:monospace}footer{text-align:center;margin-top:20px;color:var(--text-muted);font-size:.8rem}.panel{display:none}.panel.active{display:block}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<button class="theme-btn" onclick="toggleTheme()">🌙</button>
+<h1>🌐 Calculadora Subneteo IP</h1>
+<p>IPv4 · CIDR · VLSM · Redes II</p>
+</header>
+<div class="tabs">
+<button class="tab active" onclick="switchTab('simple')">Subneteo Simple</button>
+<button class="tab" onclick="switchTab('vlsm')">VLSM</button>
+</div>
+<div class="panel active" id="panel-simple">
+<div class="card">
+<h2>📥 Datos de entrada</h2>
+<div class="error" id="errorMsg"></div>
+<div class="form-grid">
+<div class="form-group"><label for="ip">Dirección IP</label><input type="text" id="ip" placeholder="192.100.20.0" value="192.100.20.0" inputmode="decimal"></div>
+<div class="form-group"><label for="cidr">Prefijo CIDR (/)</label><input type="number" id="cidr" min="1" max="32" placeholder="25" value="25" inputmode="numeric"></div>
+</div>
+<div class="form-group" style="margin-bottom:14px"><label>O elige máscara:</label>
+<select id="maskSelect">
+<option value="">-- Seleccionar --</option>
+<option value="8">255.0.0.0 (/8)</option>
+<option value="16">255.255.0.0 (/16)</option>
+<option value="24">255.255.255.0 (/24)</option>
+<option value="25">255.255.255.128 (/25)</option>
+<option value="26">255.255.255.192 (/26)</option>
+<option value="27">255.255.255.224 (/27)</option>
+<option value="28">255.255.255.240 (/28)</option>
+<option value="29">255.255.255.248 (/29)</option>
+<option value="30">255.255.255.252 (/30)</option>
+</select></div>
+<div class="btn-group">
+<button class="btn btn-primary" onclick="calcular()">Calcular</button>
+<button class="btn btn-secondary" onclick="limpiar()">Limpiar</button>
+</div>
+<div class="examples">
+<button class="example-btn" onclick="cargarEjemplo('192.100.20.0',25)">192.100.20.0/25</button>
+<button class="example-btn" onclick="cargarEjemplo('192.168.1.0',24)">192.168.1.0/24</button>
+<button class="example-btn" onclick="cargarEjemplo('10.0.0.0',16)">10.0.0.0/16</button>
+<button class="example-btn" onclick="cargarEjemplo('172.16.0.0',12)">172.16.0.0/12</button>
+<button class="example-btn" onclick="cargarEjemplo('192.168.10.0',26)">192.168.10.0/26</button>
+<button class="example-btn" onclick="cargarEjemplo('10.10.0.0',20)">10.10.0.0/20</button>
+</div>
+</div>
+<div class="card results" id="results">
+<h2>📊 Resultados</h2>
+<div class="result-grid" id="resultGrid"></div>
+<h2 style="margin-top:22px">📋 Subredes del bloque</h2>
+<div style="overflow-x:auto"><table class="subnets-table"><thead><tr><th>#</th><th>Red</th><th>Hosts</th><th>Broadcast</th></tr></thead><tbody id="subnetsBody"></tbody></table></div>
+</div>
+</div>
+<div class="panel" id="panel-vlsm">
+<div class="card">
+<h2>🔧 VLSM - Subneteo Variable</h2>
+<p style="color:var(--text-muted);font-size:.88rem;margin-bottom:14px">Divide una red grande en subredes de diferentes tamaños según la cantidad de hosts.</p>
+<div class="error" id="errorVlsm"></div>
+<div class="form-grid">
+<div class="form-group"><label>Red base</label><input type="text" id="vlsmIp" placeholder="192.168.1.0" value="192.168.1.0"></div>
+<div class="form-group"><label>CIDR base</label><input type="number" id="vlsmCidr" min="1" max="30" value="24"></div>
+</div>
+<label style="margin-bottom:8px;display:block">Hosts necesarios por subred:</label>
+<div id="vlsmHosts">
+<div class="vlsm-row"><input type="number" placeholder="Ej: 50 hosts" min="1" value="50"><button class="remove-btn" onclick="this.parentElement.remove()">×</button></div>
+<div class="vlsm-row"><input type="number" placeholder="Ej: 20 hosts" min="1" value="20"><button class="remove-btn" onclick="this.parentElement.remove()">×</button></div>
+<div class="vlsm-row"><input type="number" placeholder="Ej: 10 hosts" min="1" value="10"><button class="remove-btn" onclick="this.parentElement.remove()">×</button></div>
+</div>
+<div class="btn-group" style="margin-top:12px">
+<button class="btn btn-secondary" onclick="addVlsmHost()">+ Añadir subred</button>
+<button class="btn btn-primary" onclick="calcularVLSM()">Calcular VLSM</button>
+</div>
+</div>
+<div class="card results" id="vlsmResults">
+<h2>📊 Resultados VLSM</h2>
+<div id="vlsmOutput"></div>
+</div>
+</div>
+<footer>Calculadora Subneteo IP · Redes II</footer>
+</div>
+<script>
+function toggleTheme(){const h=document.documentElement,b=document.querySelector('.theme-btn');if(h.getAttribute('data-theme')==='light'){h.removeAttribute('data-theme');b.textContent='🌙';localStorage.setItem('theme','dark')}else{h.setAttribute('data-theme','light');b.textContent='☀️';localStorage.setItem('theme','light')}}if(localStorage.getItem('theme')==='light'){document.documentElement.setAttribute('data-theme','light');document.querySelector('.theme-btn').textContent='☀️'}
+function switchTab(n){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));event.target.classList.add('active');document.getElementById('panel-'+n).classList.add('active')}
+function ipToLong(ip){const p=ip.split('.').map(Number);return((p[0]<<24)>>>0)+(p[1]<<16)+(p[2]<<8)+p[3]}
+function longToIp(n){return[(n>>>24)&255,(n>>>16)&255,(n>>>8)&255,n&255].join('.')}
+function validarIP(ip){const m=ip.match(/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/);if(!m)return false;return m.slice(1).every(o=>{const n=+o;return n>=0&&n<=255})}
+function hostsToPrefix(h){return 32-Math.ceil(Math.log2(h+2))}
+document.getElementById('maskSelect').addEventListener('change',function(){if(this.value)document.getElementById('cidr').value=this.value});
+document.getElementById('cidr').addEventListener('input',function(){document.getElementById('maskSelect').value=this.value});
+function cargarEjemplo(ip,c){document.getElementById('ip').value=ip;document.getElementById('cidr').value=c;document.getElementById('maskSelect').value=c;calcular()}
+function limpiar(){document.getElementById('ip').value='';document.getElementById('cidr').value='';document.getElementById('maskSelect').value='';document.getElementById('results').classList.remove('show');document.getElementById('errorMsg').classList.remove('show')}
+function calcular(){const err=document.getElementById('errorMsg');err.classList.remove('show');const ipStr=document.getElementById('ip').value.trim(),cidr=parseInt(document.getElementById('cidr').value);if(!validarIP(ipStr)){err.textContent='⚠️ IP inválida';err.classList.add('show');return}if(isNaN(cidr)||cidr<1||cidr>32){err.textContent='⚠️ CIDR entre 1 y 32';err.classList.add('show');return}const ipLong=ipToLong(ipStr),mask=cidr===0?0:(~0<<(32-cidr))>>>0,network=(ipLong&mask)>>>0,wildcard=(~mask)>>>0,broadcast=(network|wildcard)>>>0,total=Math.pow(2,32-cidr),usable=total>2?total-2:total,first=cidr>=31?network:network+1,last=cidr>=31?broadcast:broadcast-1,maskStr=longToIp(mask),wildStr=longToIp(wildcard);const fo=+ipStr.split('.')[0];let clase='Desconocida';if(fo>=1&&fo<=126)clase='A';else if(fo>=128&&fo<=191)clase='B';else if(fo>=192&&fo<=223)clase='C';else if(fo>=224&&fo<=239)clase='D';else if(fo>=240)clase='E';let tipo='Pública';const s2=+ipStr.split('.')[1];if(fo===10||(fo===172&&s2>=16&&s2<=31)||(fo===192&&s2===168))tipo='Privada';else if(fo===127)tipo='Loopback';document.getElementById('resultGrid').innerHTML=`<div class="result-item highlight"><div class="label">Dirección de Red</div><div class="value">${longToIp(network)}</div></div><div class="result-item highlight"><div class="label">Broadcast</div><div class="value">${longToIp(broadcast)}</div></div><div class="result-item"><div class="label">Rango de Hosts</div><div class="value">${longToIp(first)} – ${longToIp(last)}</div></div><div class="result-item"><div class="label">Hosts Usables</div><div class="value">${usable.toLocaleString()}</div></div><div class="result-item"><div class="label">Total Direcciones</div><div class="value">${total.toLocaleString()}</div></div><div class="result-item"><div class="label">Máscara</div><div class="value">${maskStr}</div></div><div class="result-item"><div class="label">Wildcard</div><div class="value">${wildStr}</div></div><div class="result-item"><div class="label">CIDR</div><div class="value">/${cidr}</div></div><div class="result-item"><div class="label">Clase</div><div class="value">${clase}</div></div><div class="result-item"><div class="label">Tipo</div><div class="value">${tipo}</div></div>`;let parentP=cidr>24?24:(cidr>16?16:8);const block=Math.pow(2,32-cidr),pMask=(~0<<(32-parentP))>>>0,pNet=(network&pMask)>>>0,pSize=Math.pow(2,32-parentP),num=pSize/block,maxShow=Math.min(num,48),tbody=document.getElementById('subnetsBody');tbody.innerHTML='';for(let i=0;i<maxShow;i++){const sn=(pNet+i*block)>>>0,sb=(sn+block-1)>>>0,sf=cidr>=31?sn:sn+1,sl=cidr>=31?sb:sb-1,tr=document.createElement('tr');if(sn===network)tr.className='current';tr.innerHTML=`<td>${i+1}</td><td>${longToIp(sn)}</td><td>${longToIp(sf)} – ${longToIp(sl)}</td><td>${longToIp(sb)}</td>`;tbody.appendChild(tr)}document.getElementById('results').classList.add('show')}
+function addVlsmHost(){const d=document.createElement('div');d.className='vlsm-row';d.innerHTML=`<input type="number" placeholder="Hosts necesarios" min="1"><button class="remove-btn" onclick="this.parentElement.remove()">×</button>`;document.getElementById('vlsmHosts').appendChild(d)}
+function calcularVLSM(){const err=document.getElementById('errorVlsm');err.classList.remove('show');const baseIp=document.getElementById('vlsmIp').value.trim(),baseCidr=parseInt(document.getElementById('vlsmCidr').value);if(!validarIP(baseIp)){err.textContent='⚠️ IP base inválida';err.classList.add('show');return}if(isNaN(baseCidr)||baseCidr<1||baseCidr>30){err.textContent='⚠️ CIDR inválido';err.classList.add('show');return}const inputs=document.querySelectorAll('#vlsmHosts input');let reqs=[];inputs.forEach((inp,i)=>{const h=parseInt(inp.value);if(h>0)reqs.push({hosts:h,name:'Subred '+(i+1)})});if(!reqs.length){err.textContent='⚠️ Añade hosts';err.classList.add('show');return}reqs.sort((a,b)=>b.hosts-a.hosts);let current=ipToLong(baseIp);const baseMask=(~0<<(32-baseCidr))>>>0,baseNet=(current&baseMask)>>>0,baseEnd=baseNet+Math.pow(2,32-baseCidr);current=baseNet;let output='',ok=true;reqs.forEach(req=>{if(!ok)return;const prefix=hostsToPrefix(req.hosts);if(prefix<baseCidr){err.textContent=`⚠️ ${req.name} necesita más espacio`;err.classList.add('show');ok=false;return}const size=Math.pow(2,32-prefix);if(current+size>baseEnd){err.textContent='⚠️ No hay suficiente espacio';err.classList.add('show');ok=false;return}const alignMask=(~0<<(32-prefix))>>>0;if((current&alignMask)!==current)current=((current+size-1)&alignMask)>>>0;const net=current,bcast=current+size-1,first=prefix>=31?net:net+1,last=prefix>=31?bcast:bcast-1,usable=size>2?size-2:size,maskStr=longToIp((~0<<(32-prefix))>>>0);output+=`<div class="subnet-card"><h3>${req.name} — ${req.hosts} hosts</h3><div class="detail"><b>Red:</b> ${longToIp(net)}/${prefix}</div><div class="detail"><b>Máscara:</b> ${maskStr}</div><div class="detail"><b>Hosts:</b> ${longToIp(first)} – ${longToIp(last)}</div><div class="detail"><b>Broadcast:</b> ${longToIp(bcast)}</div><div class="detail"><b>Usables:</b> ${usable}</div></div>`;current=bcast+1});if(ok){document.getElementById('vlsmOutput').innerHTML=output;document.getElementById('vlsmResults').classList.add('show')}}
+window.onload=calcular;
+</script>
+</body>
+</html>
